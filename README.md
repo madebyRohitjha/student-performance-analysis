@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Student Performance Prediction
 
 # Project Overview
@@ -32,3 +33,7 @@ Reading Score: 80
 Writing Score: 75
 
 Predicted Math Score: 74.29
+=======
+# student-performance-analysis
+Student performance analysis and prediction using Pandas, Matplotlib, and Scikit-Learn.
+>>>>>>> 15a3f3e48990c2d73b220839e19d424b9ad7c839
