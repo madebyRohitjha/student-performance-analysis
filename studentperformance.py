@@ -44,3 +44,14 @@ new_student = [[80,75]]
 
 predictions= model.predict(new_student)
 print("predicted math score:", predictions)
+
+from sklearn.metrics import mean_squared_error, r2_score
+import numpy as np
+
+mse = mean_squared_error(y_test, predictions)
+rmse = np.sqrt(mse)
+r2 = r2_score(y_test, predictions)
+
+print("MAE :", mae)
+print("RMSE:", rmse)
+print("R² Score:", r2)
