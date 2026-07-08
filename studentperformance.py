@@ -55,3 +55,10 @@ r2 = r2_score(y_test, predictions)
 print("MAE :", mae)
 print("RMSE:", rmse)
 print("R² Score:", r2)
+
+comparison = pd.DataFrame({
+    "Actual": y_test.values,
+    "Predicted": predictions
+})
+
+print(comparison.head(20))
