@@ -2,7 +2,9 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error
+
 df = pd.read_csv("studentsperformance.csv")
+
 #profile = ProfileReport(df)
 #profile.to_file("eda_report.html")
 #print(df.head())
@@ -16,34 +18,43 @@ df = pd.read_csv("studentsperformance.csv")
 
 #print(df.groupby("test preparation course")
 #      [["reading score","writing score","math score"]].mean())
+
 #print(df[["math score","reading score","writing score"]].corr(numeric_only=True))
+
 #import matplotlib.pyplot as plt
 #avg_score = df[["math score","reading score","writing score"]].mean()
-#plt.bar(avg_score.index,avg_score.values)
+#plt.bar(avg_score.index, avg_score.values)
 #plt.show()
+
 #plt.hist(df["math score"])
 #plt.show()
 
-x = df[["reading score","writing score"]]
+x = df[["reading score", "writing score"]]
+y = df["math score"]
 
-y = df ["math score"]
-
-X_train, X_test, y_train, y_test = train_test_split( x,y,test_size =0.2,random_state= 42)
+X_train, X_test, y_train, y_test = train_test_split(
+    x, y, test_size=0.2, random_state=42
+)
 
 model = LinearRegression()
 
-model.fit(X_train,y_train)
+model.fit(X_train, y_train)
 
 predictions = model.predict(X_test)
 
-mae = mean_absolute_error(y_test,predictions)
+mae = mean_absolute_error(y_test, predictions)
 
 print("Mean Absolute Error:", mae)
 
-new_student = [[80,75]]
+# Predict a new student's math score
+new_student = pd.DataFrame({
+    "reading score": [80],
+    "writing score": [75]
+})
 
-predictions= model.predict(new_student)
-print("predicted math score:", predictions)
+new_prediction = model.predict(new_student)
+
+print("Predicted math score:", round(new_prediction[0], 2))
 
 from sklearn.metrics import mean_squared_error, r2_score
 import numpy as np
