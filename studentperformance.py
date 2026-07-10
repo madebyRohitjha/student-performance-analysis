@@ -73,3 +73,17 @@ comparison = pd.DataFrame({
 })
 
 print(comparison.head(20))
+
+
+comparison = pd.DataFrame({
+    "Actual Math Score": y_test.values,
+    "Predicted Math Score": predictions
+})
+
+print(comparison.head(20))
+
+comparison["Error"] = comparison["Actual Math Score"] - comparison["Predicted Math Score"]
+
+print(comparison.head(20))
+
+comparison.to_csv("prediction_results.csv", index=False)
