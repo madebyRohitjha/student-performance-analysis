@@ -87,3 +87,15 @@ comparison["Error"] = comparison["Actual Math Score"] - comparison["Predicted Ma
 print(comparison.head(20))
 
 comparison.to_csv("prediction_results.csv", index=False)
+
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(6,6))
+
+plt.scatter(y_test, predictions)
+
+plt.xlabel("Actual Math Score")
+plt.ylabel("Predicted Math Score")
+plt.title("Actual vs Predicted Math Scores")
+
+plt.show()
