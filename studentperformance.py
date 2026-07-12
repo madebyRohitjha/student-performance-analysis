@@ -99,3 +99,10 @@ plt.ylabel("Predicted Math Score")
 plt.title("Actual vs Predicted Math Scores")
 
 plt.show()
+
+coefficients = pd.DataFrame({
+    "Feature": X_train.columns,
+    "Coefficient": model.coef_
+})
+
+print(coefficients)
