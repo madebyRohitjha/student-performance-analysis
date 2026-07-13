@@ -131,3 +131,53 @@ model.fit(X_train, y_train)
 predictions = model.predict(X_test)
 
 print("MAE:", mean_absolute_error(y_test, predictions))
+
+from sklearn.tree import DecisionTreeRegressor
+
+model = DecisionTreeRegressor(random_state=42)
+model.fit(X_train, y_train)
+
+from sklearn.metrics import (
+    mean_absolute_error,
+    mean_squared_error,
+    r2_score
+)
+
+import numpy as np
+
+mae = mean_absolute_error(y_test, predictions)
+rmse = np.sqrt(mean_squared_error(y_test, predictions))
+r2 = r2_score(y_test, predictions)
+
+print("MAE :", mae)
+print("RMSE:", rmse)
+print("R² :", r2)
+
+from sklearn.metrics import (
+    mean_absolute_error,
+    mean_squared_error,
+    r2_score
+)
+
+import numpy as np
+
+mae = mean_absolute_error(y_test, predictions)
+rmse = np.sqrt(mean_squared_error(y_test, predictions))
+r2 = r2_score(y_test, predictions)
+
+print("MAE :", mae)
+print("RMSE:", rmse)
+print("R² :", r2)
+
+results = pd.DataFrame({
+    "Model": ["Linear Regression", "Decision Tree"],
+    "MAE": [linear_mae, decision_tree_mae],
+    "RMSE": [linear_rmse, decision_tree_rmse],
+    "R²": [linear_r2, decision_tree_r2]
+})
+
+print(results)
+
+linear_mae = mae
+linear_rmse = rmse
+linear_r2 = r2
