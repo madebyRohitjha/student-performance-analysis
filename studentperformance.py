@@ -187,3 +187,60 @@ results = pd.DataFrame({
 })
 
 print(results)
+
+from sklearn.ensemble import RandomForestRegressor
+
+model = RandomForestRegressor(
+    n_estimators=100,
+    random_state=42
+)
+
+model.fit(X_train, y_train)
+
+predictions = model.predict(X_test)
+
+random_forest_mae = mean_absolute_error(y_test, predictions)
+random_forest_rmse = np.sqrt(mean_squared_error(y_test, predictions))
+random_forest_r2 = r2_score(y_test, predictions)
+
+print("Random Forest")
+print("MAE :", random_forest_mae)
+print("RMSE:", random_forest_rmse)
+print("R² :", random_forest_r2)
+
+results = pd.DataFrame({
+    "Model": [
+        "Linear Regression",
+        "Decision Tree",
+        "Random Forest"
+    ],
+    "MAE": [
+        linear_mae,
+        decision_tree_mae,
+        random_forest_mae
+    ],
+    "RMSE": [
+        linear_rmse,
+        decision_tree_rmse,
+        random_forest_rmse
+    ],
+    "R²": [
+        linear_r2,
+        decision_tree_r2,
+        random_forest_r2
+    ]
+})
+
+print(results)
+
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(8,5))
+
+plt.bar(results["Model"], results["MAE"])
+
+plt.title("Model Comparison (MAE)")
+plt.xlabel("Model")
+plt.ylabel("MAE")
+
+plt.show()
