@@ -244,3 +244,32 @@ plt.xlabel("Model")
 plt.ylabel("MAE")
 
 plt.show()
+
+importance = pd.DataFrame({
+    "Feature": X.columns,
+    "Importance": model.feature_importances_
+})
+
+importance = importance.sort_values(
+    by="Importance",
+    ascending=False
+)
+
+print(importance)
+
+plt.figure(figsize=(10,6))
+
+plt.barh(
+    importance["Feature"],
+    importance["Importance"]
+)
+
+plt.title("Feature Importance")
+plt.xlabel("Importance")
+
+plt.show()
+
+importance.to_csv(
+    "feature_importance.csv",
+    index=False
+)
