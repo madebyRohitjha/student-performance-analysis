@@ -273,3 +273,15 @@ importance.to_csv(
     "feature_importance.csv",
     index=False
 )
+
+import joblib
+
+joblib.dump(model, "student_math_predictor.pkl")
+
+print("Model saved successfully!")
+
+loaded_model = joblib.load("student_math_predictor.pkl")
+
+prediction = loaded_model.predict(X_test)
+
+print(prediction[:5])
