@@ -307,3 +307,40 @@ cv_results = pd.DataFrame({
 })
 
 print(cv_results)
+
+from sklearn.model_selection import GridSearchCV
+
+param_grid = {
+    "n_estimators": [50, 100, 200],
+    "max_depth": [None, 5, 10, 20],
+    "min_samples_split": [2, 5, 10]
+}
+
+grid_search = GridSearchCV(
+    estimator=RandomForestRegressor(random_state=42),
+    param_grid=param_grid,
+    cv=5,
+    scoring="r2",
+    n_jobs=-1
+)
+grid_search.fit(X_train, y_train)
+print("Best Parameters:")
+print(grid_search.best_params_)
+
+print("Best Cross Validation Score:")
+print(grid_search.best_score_)
+
+best_model = grid_search.best_estimator_
+
+predictions = best_model.predict(X_test)
+
+best_mae = mean_absolute_error(y_test, predictions)
+best_rmse = np.sqrt(mean_squared_error(y_test, predictions))
+best_r2 = r2_score(y_test, predictions)
+
+print("Best Model Results")
+print("MAE :", best_mae)
+print("RMSE:", best_rmse)
+print("R² :", best_r2)
+
+joblib.dump(best_model, "best_student_model.pkl")
