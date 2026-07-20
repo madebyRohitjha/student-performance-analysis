@@ -285,3 +285,25 @@ loaded_model = joblib.load("student_math_predictor.pkl")
 prediction = loaded_model.predict(X_test)
 
 print(prediction[:5])
+
+from sklearn.model_selection import cross_val_score
+
+scores = cross_val_score(
+    model,
+    X,
+    y,
+    cv=5,
+    scoring="r2"
+)
+
+print("Cross Validation Scores:")
+print(scores)
+
+print("Average R²:", scores.mean())
+
+cv_results = pd.DataFrame({
+    "Fold":[1,2,3,4,5],
+    "R2 Score":scores
+})
+
+print(cv_results)
